@@ -29,8 +29,25 @@ Ordrelogikken hænger i `server.js` under `checkout.session.completed` — her k
 
 ## Deploy
 
-Alt der kræves er Node ≥ 18. Render / Railway / Fly / en VPS: sæt `STRIPE_SECRET_KEY` og `BASE_URL=https://ditdomæne.dk`, kør `npm start`.
-På Vercel skal `server.js` pakkes som serverless function — sig til, så laver jeg den variant.
+**Vercel** (understøttet ud af boksen):
+
+1. Importér repo'et — Framework Preset: **Other**, Root Directory: `./`. Build command og output directory står tomme.
+2. Under *Environment Variables* tilføj `STRIPE_SECRET_KEY` (og evt. `STRIPE_WEBHOOK_SECRET`).
+3. Deploy. `public/` serveres statisk af CDN'et, `api/index.js` kører hele Express-appen som én serverless function, og `vercel.json` router `/api/*` og `/.well-known/agent.json` derhen.
+
+`BASE_URL` behøver du ikke sætte — appen udleder sin egen adresse fra request-headerne, så både preview- og produktions-URL'er virker.
+
+**Render / Railway / Fly / VPS:** sæt `STRIPE_SECRET_KEY`, kør `npm start`.
+
+## Filstruktur
+
+| Fil | Rolle |
+|---|---|
+| `app.js` | Hele Express-appen — ruter, Stripe, agent-endpoints |
+| `server.js` | Lokal dev-server (`app.listen`) |
+| `api/index.js` | Vercel serverless entrypoint |
+| `product.js` | Produktdata: pris, varianter, specs |
+| `public/` | Statisk frontend |
 
 ## Priser og varianter
 
