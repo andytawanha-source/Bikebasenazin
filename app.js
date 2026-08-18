@@ -3,7 +3,7 @@ import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Stripe from 'stripe';
-import { PRODUCT, SITE_NAME, priceFor, formatDKK } from './product.js';
+import { PRODUCT, SITE_NAME, SIZES, FINISHES, variants, findVariant, formatDKK } from './product.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const app = express();
@@ -55,35 +55,47 @@ app.use((req, res, next) => {
 /* ------------------------------------------------------------------ */
 const feed = (base) => ({
   '@context': 'https://schema.org',
-  '@type': 'Product',
+  '@type': 'ProductGroup',
   '@id': `${base}/#product`,
-  sku: PRODUCT.sku,
-  name: `${PRODUCT.name} — ${PRODUCT.subtitle}`,
+  name: `${PRODUCT.family} — ${PRODUCT.subtitle}`,
   brand: { '@type': 'Brand', name: PRODUCT.brand },
-  image: [PRODUCT.image],
   description: PRODUCT.shortDescription,
+  productGroupID: PRODUCT.id,
+  variesBy: ['https://schema.org/size', 'https://schema.org/color'],
   additionalProperty: PRODUCT.specs.map(([n, v]) => ({ '@type': 'PropertyValue', name: n, value: v })),
-  offers: PRODUCT.variants.map((v) => ({
-    '@type': 'Offer',
-    '@id': `${base}/#offer-${v.id}`,
-    name: v.name,
-    sku: `${PRODUCT.sku}-${v.id.toUpperCase()}`,
-    price: ((PRODUCT.price + v.priceDelta) / 100).toFixed(2),
-    priceCurrency: PRODUCT.currency,
-    availability: v.inStock ? 'https://schema.org/InStock' : 'https://schema.org/BackOrder',
-    url: `${base}/?variant=${v.id}`,
-    shippingDetails: {
-      '@type': 'OfferShippingDetails',
-      shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: PRODUCT.currency },
-      shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'DK' },
-    },
-    hasMerchantReturnPolicy: {
-      '@type': 'MerchantReturnPolicy',
-      applicableCountry: 'DK',
-      merchantReturnDays: PRODUCT.returns.days,
-      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-    },
-  })),
+  hasVariant: variants().map((v) => {
+    const size = SIZES.find((s) => s.id === v.size);
+    const finish = FINISHES.find((f) => f.id === v.finish);
+    return {
+      '@type': 'Product',
+      '@id': `${base}/#${v.id}`,
+      name: v.name,
+      sku: v.sku,
+      color: finish.name,
+      size: size.diameter,
+      image: [v.image],
+      width: { '@type': 'QuantitativeValue', value: parseFloat(size.diameter), unitCode: 'CMT' },
+      height: { '@type': 'QuantitativeValue', value: parseFloat(size.height.replace(',', '.')), unitCode: 'CMT' },
+      offers: {
+        '@type': 'Offer',
+        price: (v.price / 100).toFixed(2),
+        priceCurrency: PRODUCT.currency,
+        availability: v.inStock ? 'https://schema.org/InStock' : 'https://schema.org/BackOrder',
+        url: `${base}/?size=${v.size}&finish=${v.finish}`,
+        shippingDetails: {
+          '@type': 'OfferShippingDetails',
+          shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: PRODUCT.currency },
+          shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'DK' },
+        },
+        hasMerchantReturnPolicy: {
+          '@type': 'MerchantReturnPolicy',
+          applicableCountry: 'DK',
+          merchantReturnDays: PRODUCT.returns.days,
+          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        },
+      },
+    };
+  }),
 });
 
 app.get(['/api/product', '/api/product.json'], (req, res) => res.json(feed(baseUrl(req))));
@@ -92,7 +104,7 @@ app.get('/.well-known/agent.json', (req, res) => {
   const base = baseUrl(req);
   res.json({
     name: SITE_NAME,
-    description: `Enkeltproduktbutik for ${PRODUCT.name} (${PRODUCT.brand}).`,
+    description: `Enkeltproduktbutik for ${PRODUCT.family} ${PRODUCT.subtitle} (${PRODUCT.brand}).`,
     version: '1.0.0',
     contact: `${base}/`,
     commerce: {
@@ -106,7 +118,7 @@ app.get('/.well-known/agent.json', (req, res) => {
         body_schema: {
           type: 'object',
           properties: {
-            variant: { type: 'string', enum: PRODUCT.variants.map((v) => v.id) },
+            variant: { type: 'string', enum: variants().map((v) => v.id), description: 'Format: <størrelse>-<farve>, fx 600-messing' },
             quantity: { type: 'integer', minimum: 1, maximum: 10, default: 1 },
             email: { type: 'string', format: 'email', description: 'Valgfri — forudfylder Stripe Checkout' },
           },
@@ -143,12 +155,12 @@ app.post('/api/checkout', async (req, res) => {
 
   const cart = raw
     .map((i) => ({
-      variant: PRODUCT.variants.find((v) => v.id === i?.variant),
+      variant: findVariant(i?.variant),
       qty: Math.max(1, Math.min(10, Number(i?.quantity) || 1)),
     }))
     .filter((i) => i.variant);
 
-  if (!cart.length) cart.push({ variant: PRODUCT.variants[0], qty: 1 });
+  if (!cart.length) return res.status(400).json({ error: 'Ingen gyldig variant. Se /api/product.json for gyldige id\'er.' });
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -159,19 +171,22 @@ app.post('/api/checkout', async (req, res) => {
       billing_address_collection: 'required',
       shipping_address_collection: { allowed_countries: ['DK', 'SE', 'NO', 'DE'] },
       phone_number_collection: { enabled: true },
-      line_items: cart.map(({ variant, qty }) => ({
-        quantity: qty,
-        price_data: {
-          currency: PRODUCT.currency.toLowerCase(),
-          unit_amount: PRODUCT.price + variant.priceDelta,
-          product_data: {
-            name: `${PRODUCT.name} — ${variant.name}`,
-            description: `${PRODUCT.brand} · design ${PRODUCT.designer}, ${PRODUCT.year} · Ø48 cm`,
-            images: [PRODUCT.image],
-            metadata: { sku: `${PRODUCT.sku}-${variant.id.toUpperCase()}` },
+      line_items: cart.map(({ variant, qty }) => {
+        const size = SIZES.find((s) => s.id === variant.size);
+        return {
+          quantity: qty,
+          price_data: {
+            currency: PRODUCT.currency.toLowerCase(),
+            unit_amount: variant.price,
+            product_data: {
+              name: variant.name,
+              description: `${PRODUCT.brand} · design ${PRODUCT.designer}, ${PRODUCT.year} · Ø ${size.diameter} × H ${size.height}`,
+              images: [variant.image],
+              metadata: { sku: variant.sku },
+            },
           },
-        },
-      })),
+        };
+      }),
       shipping_options: [
         {
           shipping_rate_data: {
@@ -187,12 +202,12 @@ app.post('/api/checkout', async (req, res) => {
       ],
       metadata: {
         product: PRODUCT.id,
-        cart: cart.map(({ variant, qty }) => `${variant.id}×${qty}`).join(', '),
+        cart: cart.map(({ variant, qty }) => `${variant.id}x${qty}`).join(', '),
       },
       success_url: `${base}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${base}/?checkout=cancelled`,
     });
-    const amount = cart.reduce((sum, { variant, qty }) => sum + priceFor(variant.id, qty), 0);
+    const amount = cart.reduce((sum, { variant, qty }) => sum + variant.price * qty, 0);
     res.json({ id: session.id, url: session.url, amount_total: amount, currency: PRODUCT.currency });
   } catch (err) {
     console.error(err);

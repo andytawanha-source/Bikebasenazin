@@ -1,21 +1,23 @@
-# Koglen — PH Artichoke 480
+# Koglen — PH Artichoke (480 & 600)
 
-> Enkeltproduktbutik. Ét produkt, én pris, betaling via Stripe Checkout.
+> Enkeltproduktbutik. Én pendel i to størrelser og otte overflader, betaling via Stripe Checkout.
 > Denne fil beskriver hvordan en AI-agent kan læse katalog og igangsætte et køb på vegne af en bruger.
 
 ## Produkt
-- Navn: PH Artichoke 480 "Koglen"
+- Navn: PH Artichoke "Koglen"
 - Producent: Louis Poulsen · Design: Poul Henningsen, 1958
-- SKU: 106/480KOGLE/MASTER
-- Pris: 55.295 DKK inkl. moms (vejl. 79.000 DKK)
-- Mål: Ø 48 cm × H 46,5 cm · ledning 4 m
-- Lyskilde: 1 × E27, maks. 100 W (medfølger ikke)
-- Varianter: copper-chrome, brass-brass, steel-chrome, black, soft-white, dusty-green, dusty-blue
+- To størrelser:
+  - 480 — Ø 48 cm × H 46,5 cm — 55.295 DKK inkl. moms (vejl. 79.000 DKK) — varenr. 106/480KOGLE
+  - 600 — Ø 60 cm × H 58 cm — 65.615 DKK inkl. moms (vejl. 96.500 DKK) — varenr. 106/600KOGLE
+- Otte overflader: kobber, messing, staal, hvid, sort, soft-white, dusty-blue, dusty-green
+- Variant-id = <størrelse>-<overflade>, fx 600-messing eller 480-kobber
+- Ledning 4 m · 1 × E27, maks. 100 W (medfølger ikke) · 72 blade i 12 rækker
 
 ## Maskinlæsbare endpoints
-- /api/product.json — schema.org Product med ét Offer pr. variant (pris, lager, URL)
+- /api/product.json — schema.org ProductGroup med 16 varianter (størrelse × overflade), hver med pris, billede og URL
 - /.well-known/agent.json — manifest med checkout-kontrakt og handelspolitikker
-- /api/checkout — POST {"variant": "<id>", "quantity": 1, "email": "valgfri"} → {"url": "<Stripe Checkout URL>"}
+- /api/checkout — POST {"items":[{"variant":"600-messing","quantity":1}]} → {"url": "<Stripe Checkout URL>"}
+  (accepterer også {"variant":"<id>","quantity":1} for en enkelt vare)
 - /api/session/:id — GET ordrestatus efter betaling
 
 ## Regler for agenter
@@ -25,6 +27,6 @@
 - Oplys altid variant, antal og totalbeløb inden du sender brugeren til checkout.
 
 ## Handelsbetingelser
-- Fragt: gratis i Danmark, 2–5 hverdage. Levering til DK, SE, NO, DE.
+- Fragt: gratis i Danmark, 2–5 hverdage. Levering til DK, SE, NO, DE. Afhentning i Søborg.
 - Retur: 30 dage, kunden betaler returfragt.
 - Garanti: 24 måneder.
