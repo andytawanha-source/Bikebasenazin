@@ -76,6 +76,15 @@ curl -s -X POST localhost:3000/api/checkout \
   -d '{"variant":"brass-brass","quantity":1}' | jq .
 ```
 
+## Billeder
+
+Tre kilder, alle defineret i `IMG` øverst i `public/index.html`:
+
+- **Produktbilledet** hotlinkes fra leverandørens Sirv-CDN. Fejler det, tegner siden pendlen som inline SVG i stedet for at vise et brudt billede.
+- **Stemningsbilledet** (spisestue i skumring) og **materialebilledet** (børstet kobber) er AI-genereret stemningsfoto uden lampe i motivet. De hotlinkes p.t. fra Artlists CDN — hent dem ned i `public/img/` og skift stien i `IMG`, hvis siden skal stå på egne ben.
+
+Gallerisektionen bruger samme produktfoto i tre CSS-zoom, så det læses som detaljebilleder. Får du rigtige fotos af de enkelte varianter, sættes de ind samme sted.
+
 ## Bemærk
 
 Produktdata er hentet fra den offentlige produktside. Lagerstatus pr. variant er pladsholdere — kobl dem til dit eget lager før produktion. Billedet hotlinkes fra leverandørens CDN; siden falder tilbage til en tegnet SVG hvis det blokeres.

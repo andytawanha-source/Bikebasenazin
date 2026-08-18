@@ -134,9 +134,21 @@ app.post('/api/checkout', async (req, res) => {
   if (!stripe) return res.status(503).json({ error: 'Stripe er ikke konfigureret. Sæt STRIPE_SECRET_KEY.' });
 
   const base = baseUrl(req);
-  const { variant: variantId, quantity = 1, email } = req.body ?? {};
-  const variant = PRODUCT.variants.find((v) => v.id === variantId) ?? PRODUCT.variants[0];
-  const qty = Math.max(1, Math.min(10, Number(quantity) || 1));
+  const { email } = req.body ?? {};
+
+  // Accepterer både {variant, quantity} (én vare) og {items:[{variant, quantity}]} (kurv).
+  const raw = Array.isArray(req.body?.items) && req.body.items.length
+    ? req.body.items
+    : [{ variant: req.body?.variant, quantity: req.body?.quantity ?? 1 }];
+
+  const cart = raw
+    .map((i) => ({
+      variant: PRODUCT.variants.find((v) => v.id === i?.variant),
+      qty: Math.max(1, Math.min(10, Number(i?.quantity) || 1)),
+    }))
+    .filter((i) => i.variant);
+
+  if (!cart.length) cart.push({ variant: PRODUCT.variants[0], qty: 1 });
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -147,21 +159,19 @@ app.post('/api/checkout', async (req, res) => {
       billing_address_collection: 'required',
       shipping_address_collection: { allowed_countries: ['DK', 'SE', 'NO', 'DE'] },
       phone_number_collection: { enabled: true },
-      line_items: [
-        {
-          quantity: qty,
-          price_data: {
-            currency: PRODUCT.currency.toLowerCase(),
-            unit_amount: PRODUCT.price + variant.priceDelta,
-            product_data: {
-              name: `${PRODUCT.name} — ${variant.name}`,
-              description: `${PRODUCT.brand} · design ${PRODUCT.designer}, ${PRODUCT.year} · Ø48 cm`,
-              images: [PRODUCT.image],
-              metadata: { sku: `${PRODUCT.sku}-${variant.id.toUpperCase()}` },
-            },
+      line_items: cart.map(({ variant, qty }) => ({
+        quantity: qty,
+        price_data: {
+          currency: PRODUCT.currency.toLowerCase(),
+          unit_amount: PRODUCT.price + variant.priceDelta,
+          product_data: {
+            name: `${PRODUCT.name} — ${variant.name}`,
+            description: `${PRODUCT.brand} · design ${PRODUCT.designer}, ${PRODUCT.year} · Ø48 cm`,
+            images: [PRODUCT.image],
+            metadata: { sku: `${PRODUCT.sku}-${variant.id.toUpperCase()}` },
           },
         },
-      ],
+      })),
       shipping_options: [
         {
           shipping_rate_data: {
@@ -175,11 +185,15 @@ app.post('/api/checkout', async (req, res) => {
           },
         },
       ],
-      metadata: { product: PRODUCT.id, variant: variant.id },
+      metadata: {
+        product: PRODUCT.id,
+        cart: cart.map(({ variant, qty }) => `${variant.id}×${qty}`).join(', '),
+      },
       success_url: `${base}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${base}/?checkout=cancelled`,
     });
-    res.json({ id: session.id, url: session.url, amount_total: priceFor(variant.id, qty), currency: PRODUCT.currency });
+    const amount = cart.reduce((sum, { variant, qty }) => sum + priceFor(variant.id, qty), 0);
+    res.json({ id: session.id, url: session.url, amount_total: amount, currency: PRODUCT.currency });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
@@ -196,7 +210,7 @@ app.get('/api/session/:id', async (req, res) => {
       email: s.customer_details?.email ?? null,
       amount_total: s.amount_total,
       amount_formatted: formatDKK(s.amount_total ?? 0),
-      variant: s.metadata?.variant ?? null,
+      cart: s.metadata?.cart ?? null,
     });
   } catch {
     res.status(404).json({ error: 'Ukendt session' });

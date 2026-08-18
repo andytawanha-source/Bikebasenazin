@@ -3,211 +3,480 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PH Artichoke 480 — Koglen</title>
-<meta name="description" content="PH Artichoke 480, Koglen. Louis Poulsen, design Poul Henningsen 1958. 72 blade, blændfrit lys. 55.295 kr. Fri fragt i Danmark.">
+<title>PH Artichoke 480 — Koglen | Louis Poulsen</title>
+<meta name="description" content="PH Artichoke 480, Koglen. 72 laserskårne blade, blændfrit lys fra enhver vinkel. Design Poul Henningsen, 1958. 55.295 kr. Fri fragt i Danmark.">
+<meta name="theme-color" content="#0e0d0c">
 <link rel="canonical" href="/">
 <meta property="og:title" content="PH Artichoke 480 — Koglen">
-<meta property="og:description" content="72 laserskårne blade. Blændfri i enhver synsvinkel.">
-<meta property="og:image" content="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg">
+<meta property="og:description" content="72 blade. 12 rækker. Nul blænding.">
 <meta property="og:type" content="product">
+<meta property="og:image" content="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg">
 <link rel="preconnect" href="https://brdrfriis.sirv.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#f4f2ee; --ink:#16140f; --muted:#8b857a; --line:#ded9d0;
-    --accent:#16140f; --warm:#f9d9a8;
-    --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
-    --sans: ui-sans-serif,-apple-system,"Helvetica Neue",Inter,Arial,sans-serif;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:#111010; --ink:#f0ece4; --muted:#8d877c; --line:#2a2724; --accent:#f0ece4; }
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
-    font-size:15px; line-height:1.6; letter-spacing:.01em;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit}
-  header{
-    display:flex; justify-content:space-between; align-items:baseline;
-    padding:26px clamp(20px,5vw,56px); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
-  }
-  header .mark{font-weight:600}
-  header .meta{color:var(--muted)}
+:root{
+  --bg:#f5f3ef; --ink:#14120f; --muted:#8a8378; --line:#e3ded5; --hair:rgba(20,18,15,.10);
+  --dark:#0e0d0c; --dark-ink:#efeae1; --glow:#f6cf95; --copper:#b06d44;
+  --serif:"Instrument Serif","Iowan Old Style",Palatino,Georgia,serif;
+  --sans:"Inter",ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(20px,5vw,72px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+  font-size:15.5px; line-height:1.65; font-weight:400; letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
+button{font:inherit; color:inherit}
+h1,h2,h3{font-family:var(--serif); font-weight:400; letter-spacing:-.015em; margin:0}
+.eyebrow{font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); font-weight:500}
 
-  main{max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,56px) 40px}
-  .stage{
-    display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(32px,6vw,90px); align-items:center;
-    min-height:calc(100vh - 210px);
-  }
-  @media (max-width:900px){ .stage{grid-template-columns:1fr; gap:34px; min-height:0; padding-top:10px} }
+/* grain + scroll progress */
+.grain{position:fixed; inset:0; z-index:900; pointer-events:none; opacity:.5; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E")}
+#bar{position:fixed; top:0; left:0; height:2px; width:0; background:var(--copper); z-index:1000; transition:width .1s linear}
 
-  /* ---------- image ---------- */
-  .frame{position:relative; display:grid; place-items:center; padding:clamp(10px,4vw,40px)}
-  .frame::before{
-    content:""; position:absolute; inset:-6%;
-    background:radial-gradient(58% 52% at 50% 40%, rgba(255,214,150,.42), rgba(255,214,150,0) 70%);
-    filter:blur(6px); pointer-events:none;
-  }
-  .frame img, .frame svg{position:relative; width:100%; max-width:520px; height:auto; display:block}
-  .frame img{mix-blend-mode:multiply}
-  @media (prefers-color-scheme: dark){ .frame img{mix-blend-mode:normal} }
-  .frame img{opacity:0; transition:opacity .7s ease}
-  .frame img.in{opacity:1}
+/* announce */
+.announce{background:var(--dark); color:var(--dark-ink); font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; padding:10px var(--pad); display:flex; justify-content:center; gap:34px; flex-wrap:wrap}
+.announce span{opacity:.75}
+@media(max-width:640px){ .announce span:nth-child(n+2){display:none} }
 
-  /* ---------- panel ---------- */
-  .eyebrow{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:0 0 14px}
-  h1{font-family:var(--serif); font-weight:400; font-size:clamp(38px,5.4vw,62px); line-height:1.02; margin:0 0 6px; letter-spacing:-.01em}
-  h1 em{display:block; font-style:italic; font-size:.52em; color:var(--muted); margin-top:10px; letter-spacing:0}
-  .lede{color:var(--muted); max-width:38ch; margin:18px 0 30px}
+/* header */
+header{position:sticky; top:0; z-index:800; padding:0 var(--pad);
+  display:flex; align-items:center; justify-content:space-between; height:72px;
+  transition:background .4s var(--ease), box-shadow .4s var(--ease), height .4s var(--ease)}
+header.stuck{background:rgba(245,243,239,.82); backdrop-filter:blur(14px) saturate(1.3); box-shadow:0 1px 0 var(--hair); height:62px}
+.logo{font-family:var(--serif); font-size:22px; letter-spacing:-.01em}
+.logo small{font-family:var(--sans); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); display:block; margin-top:-4px}
+nav{display:flex; gap:30px; font-size:12.5px; letter-spacing:.04em}
+nav a{color:var(--muted); position:relative; padding:4px 0; transition:color .3s}
+nav a::after{content:""; position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--ink); transition:width .35s var(--ease)}
+nav a:hover{color:var(--ink)} nav a:hover::after{width:100%}
+@media(max-width:900px){ nav{display:none} }
+.cartbtn{background:none; border:1px solid var(--line); border-radius:999px; padding:9px 16px; cursor:pointer;
+  font-size:12px; letter-spacing:.1em; text-transform:uppercase; display:flex; align-items:center; gap:8px; transition:.3s var(--ease)}
+.cartbtn:hover{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.cartbtn b{font-weight:500; font-variant-numeric:tabular-nums; min-width:14px; text-align:center}
 
-  .price{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:6px}
-  .price .now{font-family:var(--serif); font-size:30px}
-  .price .was{color:var(--muted); text-decoration:line-through; font-size:15px}
-  .price .save{
-    font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-    border:1px solid var(--line); border-radius:999px; padding:3px 10px; color:var(--muted);
-  }
-  .vat{font-size:12px; color:var(--muted); margin:0 0 30px}
+/* hero */
+.hero{padding:clamp(24px,5vw,60px) var(--pad) clamp(40px,7vw,90px);
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,5vw,70px); align-items:center; min-height:76vh}
+@media(max-width:940px){ .hero{grid-template-columns:1fr; min-height:0} }
+h1{font-size:clamp(52px,9.5vw,132px); line-height:.88}
+h1 i{font-style:italic; color:var(--muted)}
+.hero .sub{max-width:34ch; color:var(--muted); margin:26px 0 30px; font-size:16px}
+.hero .row{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
+.pricetag{font-family:var(--serif); font-size:30px}
+.pricetag s{color:var(--muted); font-size:15px; font-family:var(--sans); margin-left:10px}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; cursor:pointer;
+  background:var(--ink); color:var(--bg); border:1px solid var(--ink); border-radius:999px;
+  padding:16px 30px; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  transition:.35s var(--ease); position:relative; overflow:hidden}
+.btn:hover{transform:translateY(-2px); box-shadow:0 14px 34px rgba(20,18,15,.22)}
+.btn.ghost{background:none; color:var(--ink); border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink); box-shadow:none}
+.btn[disabled]{opacity:.4; cursor:not-allowed; transform:none; box-shadow:none}
+.btn .spin{width:13px; height:13px; border:1.5px solid currentColor; border-right-color:transparent;
+  border-radius:50%; display:none; animation:sp .7s linear infinite}
+.btn.loading .spin{display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
 
-  .label{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin:0 0 12px}
-  .swatches{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 8px; padding:0; list-style:none}
-  .sw{
-    width:34px; height:34px; border-radius:50%; padding:0; cursor:pointer; position:relative;
-    border:1px solid rgba(0,0,0,.18); background:var(--c); transition:transform .18s ease, box-shadow .18s ease;
-  }
-  .sw:hover{transform:translateY(-2px)}
-  .sw[aria-pressed="true"]{box-shadow:0 0 0 1px var(--bg), 0 0 0 2px var(--ink)}
-  .sw[data-stock="0"]::after{
-    content:""; position:absolute; inset:-1px; border-radius:50%;
-    background:linear-gradient(to bottom right, transparent calc(50% - .6px), var(--ink) 50%, transparent calc(50% + .6px));
-    opacity:.55;
-  }
-  .variant-name{font-size:13px; color:var(--muted); min-height:20px; margin:0 0 26px}
+.shot{position:relative; display:grid; place-items:center; padding:20px}
+.shot::before{content:""; position:absolute; inset:-8%; pointer-events:none;
+  background:radial-gradient(56% 50% at 50% 42%, rgba(246,207,149,.5), rgba(246,207,149,0) 70%); filter:blur(4px)}
+.shot img{position:relative; width:100%; max-width:540px; mix-blend-mode:multiply;
+  opacity:0; transform:translateY(18px) scale(.98); transition:opacity 1s var(--ease), transform 1.2s var(--ease)}
+.shot img.in{opacity:1; transform:none}
+.cue{position:absolute; bottom:-6px; left:50%; transform:translateX(-50%); font-size:10px;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:9px}
+.cue::after{content:""; width:1px; height:26px; background:var(--line); animation:drop 2s infinite var(--ease)}
+@keyframes drop{0%,100%{opacity:.3; transform:scaleY(.5)} 50%{opacity:1; transform:scaleY(1)}}
 
-  .buy{display:flex; gap:12px; align-items:stretch; flex-wrap:wrap}
-  .qty{display:flex; align-items:center; border:1px solid var(--line); border-radius:999px; overflow:hidden}
-  .qty button{
-    width:42px; height:52px; border:0; background:none; color:var(--ink); font-size:17px; cursor:pointer; line-height:1;
-  }
-  .qty button:hover{background:rgba(0,0,0,.04)}
-  .qty span{width:26px; text-align:center; font-variant-numeric:tabular-nums}
-  .cta{
-    flex:1 1 220px; min-height:52px; border:0; border-radius:999px; cursor:pointer;
-    background:var(--accent); color:var(--bg); font-family:var(--sans); font-size:13px;
-    letter-spacing:.14em; text-transform:uppercase; transition:opacity .2s ease, transform .2s ease;
-    display:inline-flex; align-items:center; justify-content:center; gap:10px;
-  }
-  .cta:hover{opacity:.86}
-  .cta:active{transform:translateY(1px)}
-  .cta[disabled]{opacity:.35; cursor:not-allowed}
-  .cta .spin{width:14px;height:14px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;display:none;animation:sp .7s linear infinite}
-  .cta.loading .spin{display:inline-block}
-  @keyframes sp{to{transform:rotate(360deg)}}
+/* ticker */
+.ticker{border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); overflow:hidden; padding:15px 0; background:rgba(255,255,255,.35)}
+.ticker div{display:flex; gap:52px; white-space:nowrap; width:max-content; animation:slide 34s linear infinite;
+  font-family:var(--serif); font-size:19px; color:var(--muted)}
+.ticker span{display:flex; align-items:center; gap:52px}
+.ticker span::after{content:"·"; color:var(--copper)}
+@keyframes slide{to{transform:translateX(-50%)}}
 
-  .assure{display:flex; gap:20px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin-top:18px}
-  .err{color:#b0402f; font-size:13px; margin-top:14px; min-height:18px}
+/* sections */
+section{padding:clamp(64px,9vw,132px) var(--pad)}
+.head{display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:clamp(34px,5vw,60px); flex-wrap:wrap}
+h2{font-size:clamp(34px,5.2vw,66px); line-height:1.02; max-width:16ch}
+.head p{color:var(--muted); max-width:36ch; margin:0}
 
-  /* ---------- specs ---------- */
-  details{border-top:1px solid var(--line); margin-top:34px}
-  summary{
-    list-style:none; cursor:pointer; padding:16px 0; font-size:11px;
-    letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+"; font-size:15px; letter-spacing:0}
-  details[open] summary::after{content:"–"}
-  dl{margin:0 0 20px; display:grid; grid-template-columns:auto 1fr; gap:8px 26px; font-size:13.5px}
-  dt{color:var(--muted)}
-  dd{margin:0; text-align:right}
+/* full bleed ambience */
+.bleed{position:relative; height:min(76vh,680px); overflow:hidden; background:var(--dark)}
+.bleed{background:radial-gradient(70% 60% at 50% 30%, #2a2118, #0e0d0c 70%)}
+.bleed img{position:absolute; inset:0; width:100%; height:118%; object-fit:cover; opacity:.9; will-change:transform}
+.bleed .cap{position:absolute; inset:auto 0 0 0; padding:var(--pad); color:var(--dark-ink);
+  background:linear-gradient(to top, rgba(14,13,12,.86), rgba(14,13,12,0))}
+.bleed .cap h2{font-size:clamp(30px,4.4vw,58px); max-width:20ch}
+.bleed .cap p{max-width:44ch; color:rgba(239,234,225,.72); margin:14px 0 0}
 
-  footer{
-    border-top:1px solid var(--line); margin-top:20px;
-    padding:22px clamp(20px,5vw,56px) 40px; display:flex; justify-content:space-between;
-    gap:16px; flex-wrap:wrap; font-size:11.5px; color:var(--muted); letter-spacing:.04em;
-  }
-  footer a{text-decoration:none; opacity:.85}
-  footer a:hover{opacity:1; text-decoration:underline}
-  .toast{
-    position:fixed; left:50%; bottom:26px; transform:translate(-50%,20px);
-    background:var(--ink); color:var(--bg); padding:11px 20px; border-radius:999px; font-size:13px;
-    opacity:0; pointer-events:none; transition:.3s ease;
-  }
-  .toast.on{opacity:1; transform:translate(-50%,0)}
+/* stats */
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); margin-top:8px}
+.stats div{background:var(--bg); padding:clamp(22px,3.4vw,40px)}
+.stats b{font-family:var(--serif); font-weight:400; font-size:clamp(42px,6vw,76px); line-height:1; display:block}
+.stats p{color:var(--muted); font-size:13px; margin:10px 0 0}
+@media(max-width:700px){ .stats{grid-template-columns:1fr} }
+
+.split{display:grid; grid-template-columns:1fr 1fr; gap:clamp(26px,5vw,72px); align-items:center}
+@media(max-width:900px){ .split{grid-template-columns:1fr} }
+.split img{width:100%; height:100%; max-height:520px; object-fit:cover; aspect-ratio:3/2;
+  background:linear-gradient(135deg,#5a3722,#2a1a12 60%,#0f0a07)}
+.split p{color:var(--muted)}
+
+/* buy */
+.buy{background:var(--dark); color:var(--dark-ink)}
+.buy h2, .buy .eyebrow{color:var(--dark-ink)}
+.buy .eyebrow{opacity:.6}
+.buysplit{display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,5vw,80px); align-items:center}
+@media(max-width:900px){ .buysplit{grid-template-columns:1fr} }
+.buy .shotdark{position:relative; display:grid; place-items:center}
+.buy .shotdark::before{content:""; position:absolute; inset:-10%;
+  background:radial-gradient(52% 46% at 50% 44%, rgba(246,207,149,.34), rgba(246,207,149,0) 70%)}
+.buy .shotdark img{position:relative; max-width:440px; width:100%}
+.swatches{display:flex; gap:12px; flex-wrap:wrap; list-style:none; padding:0; margin:0 0 14px}
+.sw{width:40px; height:40px; border-radius:50%; padding:0; cursor:pointer; position:relative;
+  background:var(--c); border:1px solid rgba(255,255,255,.22); transition:transform .25s var(--ease), box-shadow .25s}
+.sw:hover{transform:translateY(-3px)}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--dark), 0 0 0 3px var(--dark-ink)}
+.sw[data-stock="0"]::after{content:""; position:absolute; inset:-1px; border-radius:50%;
+  background:linear-gradient(to bottom right,transparent calc(50% - .7px),var(--dark-ink) 50%,transparent calc(50% + .7px)); opacity:.7}
+.vname{font-size:13.5px; color:rgba(239,234,225,.62); margin:0 0 30px; min-height:21px}
+.buyrow{display:flex; gap:12px; flex-wrap:wrap; align-items:stretch}
+.qty{display:flex; align-items:center; border:1px solid rgba(239,234,225,.25); border-radius:999px}
+.qty button{width:44px; height:54px; background:none; border:0; cursor:pointer; font-size:17px; opacity:.8}
+.qty button:hover{opacity:1}
+.qty span{width:28px; text-align:center; font-variant-numeric:tabular-nums; font-size:14px}
+.buy .btn{background:var(--dark-ink); color:var(--dark); border-color:var(--dark-ink); flex:1 1 240px; min-height:54px}
+.buy .btn:hover{box-shadow:0 14px 40px rgba(246,207,149,.2)}
+.assure{display:flex; gap:26px; flex-wrap:wrap; font-size:12px; color:rgba(239,234,225,.55); margin-top:22px}
+.err{color:#e0836f; font-size:13px; min-height:19px; margin:12px 0 0}
+
+/* gallery */
+.gal{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+@media(max-width:800px){ .gal{grid-template-columns:1fr 1fr} .gal figure:last-child{grid-column:span 2} }
+.gal figure{margin:0; position:relative; overflow:hidden; background:#efece6; aspect-ratio:4/5}
+.gal figure img{width:100%; height:100%; object-fit:cover; mix-blend-mode:multiply;
+  transition:transform 1.1s var(--ease)}
+.gal figure:hover img{transform:scale(1.06)}
+.gal figcaption{position:absolute; left:16px; bottom:14px; font-size:10.5px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--muted)}
+.gal .z1 img{transform:scale(1.9) translate(0,14%)}
+.gal .z1:hover img{transform:scale(2.05) translate(0,14%)}
+.gal .z2 img{transform:scale(2.6) translate(-8%,-2%)}
+.gal .z2:hover img{transform:scale(2.8) translate(-8%,-2%)}
+
+/* specs + faq */
+dl.specs{display:grid; grid-template-columns:1fr 1fr; gap:0 clamp(30px,5vw,70px); margin:0}
+@media(max-width:800px){ dl.specs{grid-template-columns:1fr} }
+dl.specs div{display:flex; justify-content:space-between; gap:20px; padding:15px 0; border-bottom:1px solid var(--hair)}
+dl.specs dt{color:var(--muted); font-size:13.5px} dl.specs dd{margin:0; font-size:13.5px}
+details{border-bottom:1px solid var(--hair)}
+summary{list-style:none; cursor:pointer; padding:22px 0; display:flex; justify-content:space-between;
+  align-items:center; gap:20px; font-size:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; color:var(--muted); font-size:19px; transition:transform .3s var(--ease)}
+details[open] summary::after{content:"−"}
+details p{color:var(--muted); margin:0 0 22px; max-width:62ch; font-size:14.5px}
+
+/* footer */
+footer{background:var(--dark); color:var(--dark-ink); padding:clamp(52px,7vw,92px) var(--pad) 30px}
+.fgrid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:clamp(26px,4vw,54px); padding-bottom:44px;
+  border-bottom:1px solid rgba(239,234,225,.14)}
+@media(max-width:860px){ .fgrid{grid-template-columns:1fr 1fr} }
+@media(max-width:520px){ .fgrid{grid-template-columns:1fr} }
+.fgrid h4{font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:rgba(239,234,225,.45); margin:0 0 16px; font-weight:500}
+.fgrid ul{list-style:none; padding:0; margin:0; display:grid; gap:10px; font-size:13.5px}
+.fgrid a{color:rgba(239,234,225,.72); transition:color .25s}
+.fgrid a:hover{color:var(--dark-ink)}
+.fgrid .brand p{color:rgba(239,234,225,.6); max-width:34ch; font-size:14px; margin:14px 0 0}
+.fbot{display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; padding-top:22px;
+  font-size:11.5px; color:rgba(239,234,225,.42)}
+.pay{display:flex; gap:8px; align-items:center}
+.pay i{font-style:normal; border:1px solid rgba(239,234,225,.2); border-radius:5px; padding:3px 9px; font-size:10px; letter-spacing:.08em}
+
+/* cart drawer */
+.backdrop{position:fixed; inset:0; background:rgba(14,13,12,.5); backdrop-filter:blur(3px);
+  opacity:0; pointer-events:none; transition:opacity .4s var(--ease); z-index:950}
+.backdrop.on{opacity:1; pointer-events:auto}
+.drawer{position:fixed; top:0; right:0; bottom:0; width:min(420px,100%); background:var(--bg); z-index:960;
+  transform:translateX(101%); transition:transform .5s var(--ease); display:flex; flex-direction:column}
+.drawer.on{transform:none}
+.dhead{display:flex; justify-content:space-between; align-items:center; padding:24px 26px; border-bottom:1px solid var(--hair)}
+.dhead h3{font-size:24px}
+.dclose{background:none; border:0; cursor:pointer; font-size:22px; line-height:1; color:var(--muted)}
+.ditems{flex:1; overflow:auto; padding:8px 26px}
+.ditem{display:grid; grid-template-columns:64px 1fr auto; gap:16px; align-items:center; padding:20px 0; border-bottom:1px solid var(--hair)}
+.ditem .th{width:64px; height:64px; background:#eeeae3; display:grid; place-items:center; overflow:hidden}
+.ditem .th img{width:150%; max-width:none; mix-blend-mode:multiply}
+.ditem h5{margin:0; font-size:14px; font-weight:500}
+.ditem small{color:var(--muted); font-size:12px}
+.ditem .miniqty{display:flex; align-items:center; gap:9px; margin-top:8px; font-size:12px; color:var(--muted)}
+.ditem .miniqty button{background:none; border:1px solid var(--line); width:23px; height:23px; border-radius:50%; cursor:pointer; line-height:1}
+.ditem .price{font-size:13.5px; white-space:nowrap; font-variant-numeric:tabular-nums}
+.ditem .rm{background:none; border:0; color:var(--muted); font-size:11px; cursor:pointer; text-decoration:underline; padding:0; margin-top:6px}
+.empty{color:var(--muted); text-align:center; padding:60px 0; font-size:14px}
+.dfoot{padding:22px 26px 28px; border-top:1px solid var(--hair)}
+.drow{display:flex; justify-content:space-between; font-size:14px; margin-bottom:9px}
+.drow.total{font-family:var(--serif); font-size:23px; margin:16px 0 18px}
+.dfoot .btn{width:100%; min-height:54px}
+.dnote{font-size:11.5px; color:var(--muted); text-align:center; margin:14px 0 0}
+
+/* sticky mobile bar */
+.stickybar{position:fixed; left:0; right:0; bottom:0; z-index:700; display:none; gap:12px; padding:12px 16px;
+  background:rgba(245,243,239,.9); backdrop-filter:blur(12px); border-top:1px solid var(--hair);
+  transform:translateY(110%); transition:transform .4s var(--ease)}
+.stickybar.on{transform:none}
+.stickybar .btn{flex:1; padding:14px 20px; min-height:0}
+.stickybar .p{font-family:var(--serif); font-size:19px; display:grid; place-content:center}
+@media(max-width:940px){ .stickybar{display:flex} }
+
+/* reveal */
+.rv{opacity:0; transform:translateY(26px); transition:opacity .9s var(--ease), transform .9s var(--ease)}
+.rv.in{opacity:1; transform:none}
+.toast{position:fixed; left:50%; bottom:24px; transform:translate(-50%,20px); background:var(--ink); color:var(--bg);
+  padding:12px 22px; border-radius:999px; font-size:13px; opacity:0; pointer-events:none; transition:.35s var(--ease); z-index:970}
+.toast.on{opacity:1; transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){ *{animation:none!important; transition-duration:.01ms!important} .rv{opacity:1; transform:none} }
 </style>
 </head>
 <body>
+<div class="grain"></div>
+<div id="bar"></div>
 
-<header>
-  <div class="mark">Koglen</div>
-  <div class="meta">Louis&nbsp;Poulsen · siden&nbsp;1958</div>
+<div class="announce">
+  <span>Fri fragt i hele Danmark</span>
+  <span>30 dages returret</span>
+  <span>Udstilling i Søborg</span>
+</div>
+
+<header id="hdr">
+  <a class="logo" href="#top">Koglen<small>Louis Poulsen</small></a>
+  <nav>
+    <a href="#anatomi">Anatomien</a>
+    <a href="#kob">Køb</a>
+    <a href="#detaljer">Detaljer</a>
+    <a href="#specs">Specifikationer</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <button class="cartbtn" id="openCart">Kurv <b id="count">0</b></button>
 </header>
 
-<main>
-  <section class="stage">
-    <div class="frame">
-      <img id="hero" alt="PH Artichoke 480 pendel i kobber med kromstel"
-           src="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg?w=900">
-      <svg id="fallback" viewBox="0 0 400 420" style="display:none" aria-hidden="true"></svg>
+<main id="top">
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow rv">Poul Henningsen · 1958</p>
+      <h1 class="rv">PH Artichoke<br>480 <i>Koglen</i></h1>
+      <p class="sub rv">72 laserskårne blade i tolv rækker. Uanset hvor du står, ser du aldrig pæren — kun det lys den kaster.</p>
+      <div class="row rv">
+        <span class="pricetag"><span id="heroPrice">55.295 kr.</span><s>79.000 kr.</s></span>
+        <a class="btn" href="#kob">Vælg overflade</a>
+      </div>
     </div>
+    <div class="shot">
+      <img id="hero" alt="PH Artichoke 480 pendel i kobber med kromstel"
+           src="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg?w=1000">
+      <span class="cue">Rul</span>
+    </div>
+  </section>
 
-    <div class="panel">
-      <p class="eyebrow">Poul Henningsen · 1958</p>
-      <h1>PH Artichoke 480<em>Koglen</em></h1>
-      <p class="lede">72 laserskårne blade i 12 rækker. Blændfri i enhver synsvinkel — lyset ses aldrig direkte, kun det den rammer.</p>
+  <div class="ticker" aria-hidden="true">
+    <div>
+      <span>72 blade</span><span>12 rækker</span><span>Nul blænding</span><span>Ø 48 cm</span><span>Håndsamlet</span>
+      <span>72 blade</span><span>12 rækker</span><span>Nul blænding</span><span>Ø 48 cm</span><span>Håndsamlet</span>
+    </div>
+  </div>
 
-      <div class="price">
-        <span class="now" id="price">55.295 kr.</span>
-        <span class="was">79.000 kr.</span>
-        <span class="save">Spar 30 %</span>
+  <div class="bleed">
+    <img id="amb" alt="Skandinavisk spisestue i skumring med varmt lys over bordet">
+    <div class="cap">
+      <h2 class="rv">Lyset før lampen</h2>
+      <p class="rv">Henningsen designede aldrig lamper. Han designede lys — og lod formen følge af, hvor skyggerne skulle falde.</p>
+    </div>
+  </div>
+
+  <section id="anatomi">
+    <div class="head">
+      <div>
+        <p class="eyebrow rv">Anatomien</p>
+        <h2 class="rv">Tolv rækker,<br>seks blade i hver</h2>
       </div>
-      <p class="vat">Inkl. moms. Fri fragt i Danmark.</p>
+      <p class="rv">Hvert blad er placeret så det dækker mellemrummet i rækken over. Derfor kan du kigge direkte op i skærmen uden at blive blændet — og derfor kaster den lys i alle retninger på én gang.</p>
+    </div>
+    <div class="stats rv">
+      <div><b>72</b><p>Laserskårne blade, monteret enkeltvis</p></div>
+      <div><b>12</b><p>Rækker, forskudt i forhold til hinanden</p></div>
+      <div><b>0</b><p>Synsvinkler med direkte blænding</p></div>
+    </div>
+  </section>
 
-      <p class="label">Overflade</p>
-      <ul class="swatches" id="swatches"></ul>
-      <p class="variant-name" id="variantName"></p>
+  <section id="detaljer" style="padding-top:0">
+    <div class="split">
+      <div class="rv">
+        <p class="eyebrow">Materialet</p>
+        <h2 style="margin:14px 0 20px">Børstet metal,<br>lakeret én gang</h2>
+        <p>Bladene skæres i kobber, messing eller rustfrit stål og børstes på langs, så lyset løber hen over overfladen i stedet for at stå stille i den. Stellet er højglansforkromet eller messingmetalliseret laserskåret stål.</p>
+        <p>Overskærmen er pulverlakeret med hvid inderside — den kaster det indirekte lys tilbage ned gennem konstruktionen.</p>
+      </div>
+      <img id="mat" class="rv" alt="Nærbillede af børstet kobber">
+    </div>
+  </section>
 
-      <div class="buy">
-        <div class="qty">
-          <button type="button" id="minus" aria-label="Færre">−</button>
-          <span id="qty">1</span>
-          <button type="button" id="plus" aria-label="Flere">+</button>
+  <section class="buy" id="kob">
+    <div class="buysplit">
+      <div class="shotdark">
+        <img id="hero2" alt="PH Artichoke 480"
+             src="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg?w=900">
+      </div>
+      <div>
+        <p class="eyebrow rv">Konfigurér</p>
+        <h2 class="rv" style="margin:14px 0 26px">Vælg din overflade</h2>
+
+        <ul class="swatches rv" id="swatches"></ul>
+        <p class="vname" id="vname"></p>
+
+        <p class="pricetag rv" style="margin:0 0 22px"><span id="unitPrice">55.295 kr.</span><s>79.000 kr.</s></p>
+
+        <div class="buyrow rv">
+          <div class="qty">
+            <button type="button" id="minus" aria-label="Færre">−</button>
+            <span id="qty">1</span>
+            <button type="button" id="plus" aria-label="Flere">+</button>
+          </div>
+          <button class="btn" id="add"><span class="spin"></span><span id="addLabel">Læg i kurv</span></button>
         </div>
-        <button class="cta" id="buy">
-          <span class="spin"></span><span id="buyLabel">Køb — 55.295 kr.</span>
-        </button>
+        <p class="err" id="err"></p>
+        <div class="assure">
+          <span>Fri fragt</span><span>30 dages retur</span><span>2 års garanti</span><span>Betaling via Stripe</span>
+        </div>
       </div>
-      <p class="err" id="err"></p>
+    </div>
+  </section>
 
-      <div class="assure">
-        <span>Sikker betaling via Stripe</span>
-        <span>30 dages returret</span>
-        <span>2 års garanti</span>
+  <section>
+    <div class="head">
+      <div>
+        <p class="eyebrow rv">Nærbilleder</p>
+        <h2 class="rv">Detaljen</h2>
       </div>
+    </div>
+    <div class="gal rv">
+      <figure><img alt="Hele pendlen" src="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg?w=900"><figcaption>Helhed</figcaption></figure>
+      <figure class="z1"><img alt="Bladenes forskydning" src="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg?w=900"><figcaption>Rækkerne</figcaption></figure>
+      <figure class="z2"><img alt="Kanten på et blad" src="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg?w=900"><figcaption>Bladkant</figcaption></figure>
+    </div>
+  </section>
 
-      <details>
-        <summary>Specifikationer</summary>
-        <dl id="specs"></dl>
-      </details>
+  <section id="specs" style="padding-top:0">
+    <div class="head">
+      <div>
+        <p class="eyebrow rv">Data</p>
+        <h2 class="rv">Specifikationer</h2>
+      </div>
+    </div>
+    <dl class="specs rv" id="specList"></dl>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="head">
+      <div>
+        <p class="eyebrow rv">Spørgsmål</p>
+        <h2 class="rv">Godt at vide</h2>
+      </div>
+    </div>
+    <div class="rv">
+      <details><summary>Hvordan bliver den leveret?</summary><p>Fri fragt i hele Danmark med møbeltransport eller GLS, afhængigt af ordren. Du kan også hente den i Søborg — lagervarer er typisk klar inden for få timer. Indbæring og montering kan tilkøbes.</p></details>
+      <details><summary>Følger der en pære med?</summary><p>Nej. Pendlen har én E27-fatning på maks. 100 W. Vi anbefaler en dæmpbar pære med varm farvetemperatur, så bladene beholder deres dybde når lyset skrues ned.</p></details>
+      <details><summary>Hvor højt skal den hænge?</summary><p>Over et spisebord hænger den typisk 60–70 cm over bordpladen. Ledningen er 4 m og kan afkortes ved montering.</p></details>
+      <details><summary>Kan jeg returnere den?</summary><p>Ja — 30 dages fuld returret. Du betaler returfragten. Produktet skal være i original emballage.</p></details>
+      <details><summary>Er I autoriseret forhandler?</summary><p>Ja. Alle pendler leveres nye i original emballage med producentens 2 års garanti.</p></details>
     </div>
   </section>
 </main>
 
 <footer>
-  <span>Koglen — enkeltproduktbutik. Demo bygget på data fra produktsiden.</span>
-  <span>
-    <a href="/api/product.json">Produktfeed</a> ·
-    <a href="/.well-known/agent.json">Agent-manifest</a> ·
-    <a href="/llms.txt">llms.txt</a>
-  </span>
+  <div class="fgrid">
+    <div class="brand">
+      <a class="logo" href="#top" style="color:var(--dark-ink)">Koglen<small style="color:rgba(239,234,225,.4)">Louis Poulsen</small></a>
+      <p>Enkeltproduktbutik for PH Artichoke 480. Ét produkt, gjort ordentligt.</p>
+    </div>
+    <div>
+      <h4>Produktet</h4>
+      <ul>
+        <li><a href="#anatomi">Anatomien</a></li>
+        <li><a href="#detaljer">Materialer</a></li>
+        <li><a href="#specs">Specifikationer</a></li>
+        <li><a href="#kob">Køb</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Handel</h4>
+      <ul>
+        <li><a href="#faq">Levering</a></li>
+        <li><a href="#faq">Returret</a></li>
+        <li><a href="#faq">Garanti</a></li>
+        <li><a href="#faq">Montering</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>For agenter</h4>
+      <ul>
+        <li><a href="/api/product.json">Produktfeed</a></li>
+        <li><a href="/.well-known/agent.json">Agent-manifest</a></li>
+        <li><a href="/llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© <span id="yr">2026</span> Koglen — demo</span>
+    <div class="pay"><i>Visa</i><i>Mastercard</i><i>Apple Pay</i><i>MobilePay</i><i>Klarna</i></div>
+  </div>
 </footer>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Indkøbskurv">
+  <div class="dhead">
+    <h3>Kurv</h3>
+    <button class="dclose" id="closeCart" aria-label="Luk">×</button>
+  </div>
+  <div class="ditems" id="ditems"></div>
+  <div class="dfoot">
+    <div class="drow"><span>Fragt</span><span>Gratis</span></div>
+    <div class="drow"><span>Levering</span><span>2–5 hverdage</span></div>
+    <div class="drow total"><span>Total</span><span id="total">0 kr.</span></div>
+    <button class="btn" id="checkout"><span class="spin"></span><span id="coLabel">Til betaling</span></button>
+    <p class="dnote">Du betaler sikkert hos Stripe. Priser inkl. moms.</p>
+  </div>
+</aside>
+
+<div class="stickybar" id="sticky">
+  <span class="p" id="stickyPrice">55.295 kr.</span>
+  <button class="btn" id="stickyAdd">Læg i kurv</button>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script type="application/ld+json" id="jsonld"></script>
 <script>
+const IMG = {
+  product: 'https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg?w=1000',
+  ambience: 'https://cms-toolkit-artifacts.artlist.io/content/-t-e-x-t_-t-o_-i-m-a-g-e-v1/media__1/-t-e-x-t_-t-o_-i-m-a-g-e-aac79c54-5f3e-4edb-b0c5-fcc7f983f055.png?Expires=2102447161&Key-Pair-Id=K2ZDLYDZI2R1DF&Signature=VULcCRBI9kGTc00iHQrERTboYI8rrc5JTuCp6KuEhxnnLFdRKF8jL8kfqrTWsGtsBoCbSrHBB5UAc4DoDDjDd4DKSEwkHRBIrUiOcswB~bVtVmOQAH-VBbSMebdeBFZlYenrGePjdYUj16G3JW2qAcoQawrFBfUZPWjNvmUUg1kdmgfCGur6GHihzWbmlvF~zzfirhgnh~Bp1j8l6-TvOxIIgNcLt7ANUPgKk0OOg54jImQsCw1MYQ4eMBrL-gCib2Z73CcCZYUXgAjUVvoLE9sEr5J~MK9laQW2sreZCHhR1UvRtPnMI1eiDalT2Xu9VE3dQMKRDFDmhLSrXrvI1Q__',
+  material: 'https://cms-toolkit-artifacts.artlist.io/content/-t-e-x-t_-t-o_-i-m-a-g-e-v1/media__3/-t-e-x-t_-t-o_-i-m-a-g-e-b10a0821-75eb-4db7-9ea5-ad9483624fa2.png?Expires=2102447173&Key-Pair-Id=K2ZDLYDZI2R1DF&Signature=L950j0lpxMo37bj7WWjO8b6XMLZhwFbfP~SfjbAZzscPnZiStQDntM524tRF37cJyCI9TCvBxU1sUtWx4gAf0q9siVLGVIDghtUJ3uLNGazJ5GIs5maTCiXpf43M5NBwBBJJi9jMCuUc-OPvleaOMUit5sd1oWDhuE2jRcHlNSfzW1D~ya3ukpbZrb4lUhBT4yeQQ57EtB-m7U~rdj4coaguBsmV0YO942CC5fqP4M~BY8WzD6RJH6RjBGaoOr3AUeKbWiLrZAYZk8LD2fkl58cUAlOY~GzhBKy1VbRaGUzhg32xjqZwZ~7Nn3eU12RYm~qgXlB-mJF-Sqn0F22ElA__'
+};
+
 const VARIANTS = [
   { id:'copper-chrome', name:'Kobber / krom',        swatch:'#b06d44', delta:0, stock:1 },
   { id:'brass-brass',   name:'Messing / messing',    swatch:'#b3924f', delta:0, stock:1 },
@@ -215,39 +484,74 @@ const VARIANTS = [
   { id:'black',         name:'Sort',                 swatch:'#22201e', delta:0, stock:1 },
   { id:'soft-white',    name:'Soft white',           swatch:'#eae7e0', delta:0, stock:1 },
   { id:'dusty-green',   name:'Dusty green',          swatch:'#6d7a68', delta:0, stock:0 },
-  { id:'dusty-blue',    name:'Dusty blue',           swatch:'#6b7d8c', delta:0, stock:1 },
+  { id:'dusty-blue',    name:'Dusty blue',           swatch:'#6b7d8c', delta:0, stock:1 }
 ];
-const BASE = 5529500; // øre
+const BASE = 5529500;
 const SPECS = [
-  ['Diameter','48 cm'], ['Højde','46,5 cm'], ['Ledning','4 m'],
+  ['Diameter','48 cm'], ['Højde','46,5 cm'], ['Ledningslængde','4 m'], ['Vægt','ca. 8 kg'],
   ['Lyskilde','1 × E27, maks. 100 W'], ['Blade','72 stk. i 12 rækker'],
-  ['Beskyttelse','IP20 · klasse I'], ['Producent','Louis Poulsen'],
+  ['Beskyttelse','IP20 · klasse I'], ['Designår','1958'],
+  ['Designer','Poul Henningsen'], ['Producent','Louis Poulsen'],
+  ['Varenummer','106/480KOGLE/MASTER'], ['Garanti','2 år']
 ];
 
 const kr = m => new Intl.NumberFormat('da-DK',{style:'currency',currency:'DKK',maximumFractionDigits:0}).format(m/100);
 const $ = s => document.querySelector(s);
+const params = new URLSearchParams(location.search);
 
-let state = { variant: new URLSearchParams(location.search).get('variant') || VARIANTS[0].id, qty: 1 };
+let sel = VARIANTS.find(v => v.id === params.get('variant')) || VARIANTS[0];
+let qty = 1;
+let cart = [];   // [{id, qty}]
 
-/* specs */
-$('#specs').innerHTML = SPECS.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
-
-/* swatches */
+/* ---------- build static bits ---------- */
+$('#yr').textContent = new Date().getFullYear();
+$('#amb').src = IMG.ambience;
+$('#mat').src = IMG.material;
+$('#specList').innerHTML = SPECS.map(([k,v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
 $('#swatches').innerHTML = VARIANTS.map(v =>
   `<li><button class="sw" style="--c:${v.swatch}" data-id="${v.id}" data-stock="${v.stock}"
-      aria-pressed="false" title="${v.name}"><span class="sr" hidden>${v.name}</span></button></li>`).join('');
+     aria-pressed="false" aria-label="${v.name}" title="${v.name}"></button></li>`).join('');
 
+/* ---------- render ---------- */
 function render(){
-  const v = VARIANTS.find(x=>x.id===state.variant) || VARIANTS[0];
-  document.querySelectorAll('.sw').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id===v.id)));
-  $('#variantName').textContent = v.stock ? v.name : v.name + ' — på restordre';
-  $('#qty').textContent = state.qty;
-  const total = (BASE + v.delta) * state.qty;
-  $('#price').textContent = kr(BASE + v.delta);
-  $('#buyLabel').textContent = v.stock ? `Køb — ${kr(total)}` : 'Udsolgt';
-  $('#buy').disabled = !v.stock;
-  history.replaceState(null,'',`?variant=${v.id}`);
+  document.querySelectorAll('.sw').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === sel.id)));
+  $('#vname').textContent = sel.stock ? sel.name : sel.name + ' — på restordre, 6-8 uger';
+  $('#qty').textContent = qty;
+  const unit = BASE + sel.delta;
+  $('#unitPrice').textContent = kr(unit);
+  $('#heroPrice').textContent = kr(unit);
+  $('#stickyPrice').textContent = kr(unit);
+  $('#addLabel').textContent = sel.stock ? 'Læg i kurv' : 'Udsolgt';
+  $('#add').disabled = !sel.stock;
+  $('#stickyAdd').disabled = !sel.stock;
+  history.replaceState(null,'','?variant=' + sel.id);
+  renderCart();
   jsonld();
+}
+
+function renderCart(){
+  const n = cart.reduce((s,i) => s + i.qty, 0);
+  $('#count').textContent = n;
+  const total = cart.reduce((s,i) => s + (BASE + (VARIANTS.find(v=>v.id===i.id)?.delta||0)) * i.qty, 0);
+  $('#total').textContent = kr(total);
+  $('#checkout').disabled = !cart.length;
+  $('#ditems').innerHTML = cart.length ? cart.map(i => {
+    const v = VARIANTS.find(x => x.id === i.id);
+    return `<div class="ditem">
+      <div class="th"><img src="${IMG.product}" alt=""></div>
+      <div>
+        <h5>PH Artichoke 480</h5>
+        <small>${v.name}</small>
+        <div class="miniqty">
+          <button data-dec="${i.id}" aria-label="Færre">−</button><span>${i.qty}</span><button data-inc="${i.id}" aria-label="Flere">+</button>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="price">${kr((BASE + v.delta) * i.qty)}</div>
+        <button class="rm" data-rm="${i.id}">Fjern</button>
+      </div>
+    </div>`;
+  }).join('') : '<p class="empty">Kurven er tom.</p>';
 }
 
 function jsonld(){
@@ -255,9 +559,9 @@ function jsonld(){
     '@context':'https://schema.org','@type':'Product',
     name:'PH Artichoke 480 — Koglen', sku:'106/480KOGLE/MASTER',
     brand:{'@type':'Brand',name:'Louis Poulsen'},
-    image:[$('#hero').getAttribute('src')],
+    image:[IMG.product],
     description:'72 laserskårne blade i 12 rækker. Blændfri i enhver synsvinkel.',
-    offers: VARIANTS.map(v=>({
+    offers: VARIANTS.map(v => ({
       '@type':'Offer', name:v.name, price:((BASE+v.delta)/100).toFixed(2), priceCurrency:'DKK',
       availability: v.stock ? 'https://schema.org/InStock' : 'https://schema.org/BackOrder',
       url: location.origin + '/?variant=' + v.id
@@ -265,64 +569,107 @@ function jsonld(){
   });
 }
 
+/* ---------- interactions ---------- */
 $('#swatches').addEventListener('click', e => {
-  const b = e.target.closest('.sw'); if(!b) return;
-  state.variant = b.dataset.id; render();
+  const b = e.target.closest('.sw'); if (!b) return;
+  sel = VARIANTS.find(v => v.id === b.dataset.id); render();
 });
-$('#plus').onclick = () => { state.qty = Math.min(5, state.qty+1); render(); };
-$('#minus').onclick = () => { state.qty = Math.max(1, state.qty-1); render(); };
+$('#plus').onclick  = () => { qty = Math.min(5, qty + 1); render(); };
+$('#minus').onclick = () => { qty = Math.max(1, qty - 1); render(); };
 
-$('#buy').onclick = async () => {
-  const btn = $('#buy'); btn.classList.add('loading'); btn.disabled = true; $('#err').textContent = '';
-  try{
+function addToCart(){
+  if (!sel.stock) return;
+  const line = cart.find(i => i.id === sel.id);
+  if (line) line.qty = Math.min(10, line.qty + qty); else cart.push({ id: sel.id, qty });
+  render(); openCart();
+  toast(`${sel.name} lagt i kurven`);
+}
+$('#add').onclick = addToCart;
+$('#stickyAdd').onclick = addToCart;
+
+$('#ditems').addEventListener('click', e => {
+  const inc = e.target.dataset.inc, dec = e.target.dataset.dec, rm = e.target.dataset.rm;
+  if (inc) { const l = cart.find(i => i.id === inc); l.qty = Math.min(10, l.qty + 1); }
+  if (dec) { const l = cart.find(i => i.id === dec); l.qty -= 1; if (l.qty < 1) cart = cart.filter(i => i.id !== dec); }
+  if (rm)  { cart = cart.filter(i => i.id !== rm); }
+  if (inc || dec || rm) renderCart(), render();
+});
+
+function openCart(){ $('#drawer').classList.add('on'); $('#backdrop').classList.add('on'); document.body.classList.add('locked'); }
+function closeCart(){ $('#drawer').classList.remove('on'); $('#backdrop').classList.remove('on'); document.body.classList.remove('locked'); }
+$('#openCart').onclick = openCart;
+$('#closeCart').onclick = closeCart;
+$('#backdrop').onclick = closeCart;
+addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
+$('#checkout').onclick = async () => {
+  const btn = $('#checkout'); btn.classList.add('loading'); btn.disabled = true; $('#err').textContent = '';
+  try {
     const r = await fetch('/api/checkout', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ variant: state.variant, quantity: state.qty })
+      body: JSON.stringify({ items: cart.map(i => ({ variant: i.id, quantity: i.qty })) })
     });
     const data = await r.json();
-    if(!r.ok || !data.url) throw new Error(data.error || 'Kunne ikke oprette betaling.');
+    if (!r.ok || !data.url) throw new Error(data.error || 'Kunne ikke oprette betaling.');
     location.href = data.url;
-  }catch(err){
-    $('#err').textContent = err.message;
+  } catch (err) {
+    toast(err.message);
     btn.classList.remove('loading'); btn.disabled = false;
   }
 };
 
-if(new URLSearchParams(location.search).get('checkout')==='cancelled'){
-  const t = $('#toast'); t.textContent = 'Betalingen blev afbrudt — kurven er gemt.';
-  t.classList.add('on'); setTimeout(()=>t.classList.remove('on'), 4200);
+let toastTimer;
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('on'), 3200);
 }
+if (params.get('checkout') === 'cancelled') toast('Betalingen blev afbrudt — kurven er gemt.');
 
-/* hero image: fade in, or draw a fallback lamp if the CDN blocks hotlinking */
-const hero = $('#hero');
-hero.addEventListener('load', () => hero.classList.add('in'));
-hero.addEventListener('error', () => { hero.remove(); drawLamp(); });
-if(hero.complete && hero.naturalWidth) hero.classList.add('in');
-
-function drawLamp(){
-  const svg = $('#fallback'); svg.style.display='block';
-  const cx=200, top=70, rows=12, per=6;
-  let p = `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#c98b5c"/><stop offset="1" stop-color="#8a5330"/></linearGradient></defs>
-    <line x1="${cx}" y1="0" x2="${cx}" y2="${top}" stroke="currentColor" stroke-width="1" opacity=".5"/>`;
+/* ---------- billed-fallback ----------
+   Hvis leverandørens CDN blokerer hotlinking, tegner vi pendlen i SVG
+   i stedet for at vise et brudt billede.                                */
+function lampSVG(){
+  const cx=200, top=60, rows=12, per=6;
+  let p = `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c98b5c"/><stop offset="1" stop-color="#7d4a2a"/></linearGradient></defs>`;
+  p += `<line x1="${cx}" y1="0" x2="${cx}" y2="${top}" stroke="#8a8378" stroke-width="1.2"/>`;
   for(let r=0;r<rows;r++){
-    const t=r/(rows-1);
-    const y = top + 22 + t*230;
-    const rad = 34 + Math.sin(t*Math.PI*0.92)*120;
-    const h = 26 + t*8;
+    const t=r/(rows-1), y=top+20+t*250, rad=32+Math.sin(t*Math.PI*.92)*126, h=26+t*8;
     for(let i=0;i<per;i++){
-      const a = (i/per)*Math.PI*2 + (r%2? Math.PI/per : 0);
-      const x = cx + Math.cos(a)*rad*0.92;
-      const yy = y + Math.sin(a)*rad*0.24;
-      const w = rad*0.44;
-      p += `<path d="M ${x-w/2} ${yy} q ${w/2} ${-h*0.55} ${w} 0 q ${-w/2} ${h*0.5} ${-w} 0 z"
-             fill="url(#g)" opacity="${0.55+0.4*Math.sin(a)}" stroke="rgba(0,0,0,.15)" stroke-width=".5"/>`;
+      const a=(i/per)*Math.PI*2+(r%2?Math.PI/per:0);
+      const x=cx+Math.cos(a)*rad*.92, yy=y+Math.sin(a)*rad*.24, w=rad*.44;
+      p += `<path d="M ${x-w/2} ${yy} q ${w/2} ${-h*.55} ${w} 0 q ${-w/2} ${h*.5} ${-w} 0 z" fill="url(%23g)" opacity="${(0.5+0.45*Math.sin(a)).toFixed(2)}"/>`;
     }
   }
-  p += `<ellipse cx="${cx}" cy="${top+300}" rx="120" ry="16" fill="#f9d9a8" opacity=".45"/>`;
-  svg.innerHTML = p;
-  svg.setAttribute('style','display:block;color:currentColor');
+  p += `<ellipse cx="${cx}" cy="${top+330}" rx="118" ry="15" fill="%23f6cf95" opacity=".4"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440">${p}</svg>`;
 }
+const LAMP = 'data:image/svg+xml;utf8,' + lampSVG().replace(/#/g,'%23').replace(/"/g,"'").replace(/</g,'%3C').replace(/>/g,'%3E');
+document.addEventListener('error', e => {
+  const el = e.target;
+  if (el.tagName !== 'IMG' || el.dataset.fallen) return;
+  el.dataset.fallen = '1';
+  if (el.id === 'amb' || el.id === 'mat') { el.style.opacity = '0'; return; }
+  el.src = LAMP; el.style.mixBlendMode = 'normal'; el.style.objectFit = 'contain';
+}, true);
+
+/* ---------- motion ---------- */
+const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12, rootMargin:'0px 0px -8% 0px' });
+document.querySelectorAll('.rv').forEach((el,i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+
+const hero = $('#hero');
+const showHero = () => hero.classList.add('in');
+hero.complete && hero.naturalWidth ? showHero() : hero.addEventListener('load', showHero);
+hero.addEventListener('error', () => hero.classList.add('in'));
+
+const amb = $('#amb'), bleed = document.querySelector('.bleed');
+addEventListener('scroll', () => {
+  const y = scrollY;
+  $('#bar').style.width = (y / (document.body.scrollHeight - innerHeight) * 100) + '%';
+  $('#hdr').classList.toggle('stuck', y > 40);
+  $('#sticky').classList.toggle('on', y > innerHeight * .7);
+  const r = bleed.getBoundingClientRect();
+  if (r.top < innerHeight && r.bottom > 0) amb.style.transform = `translateY(${(r.top / innerHeight) * -8}%)`;
+}, { passive:true });
 
 render();
 </script>
