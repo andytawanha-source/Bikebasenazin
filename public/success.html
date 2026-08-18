@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tak — Koglen</title>
+<style>
+  :root{--bg:#f4f2ee;--ink:#16140f;--muted:#8b857a;--line:#ded9d0}
+  @media (prefers-color-scheme:dark){:root{--bg:#111010;--ink:#f0ece4;--muted:#8d877c;--line:#2a2724}}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);
+       font-family:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;padding:30px}
+  .card{max-width:440px;text-align:center}
+  h1{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-weight:400;font-size:44px;margin:0 0 10px}
+  p{color:var(--muted);line-height:1.65}
+  dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;font-size:13.5px;text-align:left;
+     border-top:1px solid var(--line);margin-top:28px;padding-top:20px}
+  dt{color:var(--muted)} dd{margin:0;text-align:right}
+  a{display:inline-block;margin-top:28px;color:inherit;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .glow{width:74px;height:74px;margin:0 auto 22px;border-radius:50%;
+        background:radial-gradient(circle,#f9d9a8,rgba(249,217,168,0) 70%)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow"></div>
+  <h1>Tak.</h1>
+  <p>Din ordre er modtaget. Du får en bekræftelse på mail, og vi kontakter dig om levering.</p>
+  <dl id="details"></dl>
+  <a href="/">← Tilbage</a>
+</div>
+<script>
+const id = new URLSearchParams(location.search).get('session_id');
+if(id){
+  fetch('/api/session/'+id).then(r=>r.json()).then(d=>{
+    if(d.error) return;
+    document.getElementById('details').innerHTML =
+      `<dt>Status</dt><dd>${d.payment_status === 'paid' ? 'Betalt' : d.payment_status}</dd>
+       <dt>Beløb</dt><dd>${d.amount_formatted}</dd>
+       ${d.variant ? `<dt>Variant</dt><dd>${d.variant}</dd>` : ''}
+       ${d.email ? `<dt>Mail</dt><dd>${d.email}</dd>` : ''}`;
+  }).catch(()=>{});
+}
+</script>
+</body>
+</html>

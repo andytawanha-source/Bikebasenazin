@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PH Artichoke 480 — Koglen</title>
+<meta name="description" content="PH Artichoke 480, Koglen. Louis Poulsen, design Poul Henningsen 1958. 72 blade, blændfrit lys. 55.295 kr. Fri fragt i Danmark.">
+<link rel="canonical" href="/">
+<meta property="og:title" content="PH Artichoke 480 — Koglen">
+<meta property="og:description" content="72 laserskårne blade. Blændfri i enhver synsvinkel.">
+<meta property="og:image" content="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg">
+<meta property="og:type" content="product">
+<link rel="preconnect" href="https://brdrfriis.sirv.com">
+<style>
+  :root{
+    --bg:#f4f2ee; --ink:#16140f; --muted:#8b857a; --line:#ded9d0;
+    --accent:#16140f; --warm:#f9d9a8;
+    --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans: ui-sans-serif,-apple-system,"Helvetica Neue",Inter,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#111010; --ink:#f0ece4; --muted:#8d877c; --line:#2a2724; --accent:#f0ece4; }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+    font-size:15px; line-height:1.6; letter-spacing:.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  header{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:26px clamp(20px,5vw,56px); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  }
+  header .mark{font-weight:600}
+  header .meta{color:var(--muted)}
+
+  main{max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,56px) 40px}
+  .stage{
+    display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(32px,6vw,90px); align-items:center;
+    min-height:calc(100vh - 210px);
+  }
+  @media (max-width:900px){ .stage{grid-template-columns:1fr; gap:34px; min-height:0; padding-top:10px} }
+
+  /* ---------- image ---------- */
+  .frame{position:relative; display:grid; place-items:center; padding:clamp(10px,4vw,40px)}
+  .frame::before{
+    content:""; position:absolute; inset:-6%;
+    background:radial-gradient(58% 52% at 50% 40%, rgba(255,214,150,.42), rgba(255,214,150,0) 70%);
+    filter:blur(6px); pointer-events:none;
+  }
+  .frame img, .frame svg{position:relative; width:100%; max-width:520px; height:auto; display:block}
+  .frame img{mix-blend-mode:multiply}
+  @media (prefers-color-scheme: dark){ .frame img{mix-blend-mode:normal} }
+  .frame img{opacity:0; transition:opacity .7s ease}
+  .frame img.in{opacity:1}
+
+  /* ---------- panel ---------- */
+  .eyebrow{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:0 0 14px}
+  h1{font-family:var(--serif); font-weight:400; font-size:clamp(38px,5.4vw,62px); line-height:1.02; margin:0 0 6px; letter-spacing:-.01em}
+  h1 em{display:block; font-style:italic; font-size:.52em; color:var(--muted); margin-top:10px; letter-spacing:0}
+  .lede{color:var(--muted); max-width:38ch; margin:18px 0 30px}
+
+  .price{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:6px}
+  .price .now{font-family:var(--serif); font-size:30px}
+  .price .was{color:var(--muted); text-decoration:line-through; font-size:15px}
+  .price .save{
+    font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    border:1px solid var(--line); border-radius:999px; padding:3px 10px; color:var(--muted);
+  }
+  .vat{font-size:12px; color:var(--muted); margin:0 0 30px}
+
+  .label{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin:0 0 12px}
+  .swatches{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 8px; padding:0; list-style:none}
+  .sw{
+    width:34px; height:34px; border-radius:50%; padding:0; cursor:pointer; position:relative;
+    border:1px solid rgba(0,0,0,.18); background:var(--c); transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .sw:hover{transform:translateY(-2px)}
+  .sw[aria-pressed="true"]{box-shadow:0 0 0 1px var(--bg), 0 0 0 2px var(--ink)}
+  .sw[data-stock="0"]::after{
+    content:""; position:absolute; inset:-1px; border-radius:50%;
+    background:linear-gradient(to bottom right, transparent calc(50% - .6px), var(--ink) 50%, transparent calc(50% + .6px));
+    opacity:.55;
+  }
+  .variant-name{font-size:13px; color:var(--muted); min-height:20px; margin:0 0 26px}
+
+  .buy{display:flex; gap:12px; align-items:stretch; flex-wrap:wrap}
+  .qty{display:flex; align-items:center; border:1px solid var(--line); border-radius:999px; overflow:hidden}
+  .qty button{
+    width:42px; height:52px; border:0; background:none; color:var(--ink); font-size:17px; cursor:pointer; line-height:1;
+  }
+  .qty button:hover{background:rgba(0,0,0,.04)}
+  .qty span{width:26px; text-align:center; font-variant-numeric:tabular-nums}
+  .cta{
+    flex:1 1 220px; min-height:52px; border:0; border-radius:999px; cursor:pointer;
+    background:var(--accent); color:var(--bg); font-family:var(--sans); font-size:13px;
+    letter-spacing:.14em; text-transform:uppercase; transition:opacity .2s ease, transform .2s ease;
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .cta:hover{opacity:.86}
+  .cta:active{transform:translateY(1px)}
+  .cta[disabled]{opacity:.35; cursor:not-allowed}
+  .cta .spin{width:14px;height:14px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;display:none;animation:sp .7s linear infinite}
+  .cta.loading .spin{display:inline-block}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  .assure{display:flex; gap:20px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin-top:18px}
+  .err{color:#b0402f; font-size:13px; margin-top:14px; min-height:18px}
+
+  /* ---------- specs ---------- */
+  details{border-top:1px solid var(--line); margin-top:34px}
+  summary{
+    list-style:none; cursor:pointer; padding:16px 0; font-size:11px;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+"; font-size:15px; letter-spacing:0}
+  details[open] summary::after{content:"–"}
+  dl{margin:0 0 20px; display:grid; grid-template-columns:auto 1fr; gap:8px 26px; font-size:13.5px}
+  dt{color:var(--muted)}
+  dd{margin:0; text-align:right}
+
+  footer{
+    border-top:1px solid var(--line); margin-top:20px;
+    padding:22px clamp(20px,5vw,56px) 40px; display:flex; justify-content:space-between;
+    gap:16px; flex-wrap:wrap; font-size:11.5px; color:var(--muted); letter-spacing:.04em;
+  }
+  footer a{text-decoration:none; opacity:.85}
+  footer a:hover{opacity:1; text-decoration:underline}
+  .toast{
+    position:fixed; left:50%; bottom:26px; transform:translate(-50%,20px);
+    background:var(--ink); color:var(--bg); padding:11px 20px; border-radius:999px; font-size:13px;
+    opacity:0; pointer-events:none; transition:.3s ease;
+  }
+  .toast.on{opacity:1; transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="mark">Koglen</div>
+  <div class="meta">Louis&nbsp;Poulsen · siden&nbsp;1958</div>
+</header>
+
+<main>
+  <section class="stage">
+    <div class="frame">
+      <img id="hero" alt="PH Artichoke 480 pendel i kobber med kromstel"
+           src="https://brdrfriis.sirv.com/magento/catalog/product/p/h/ph-artichoke-480-copper-chrome_1.jpg?w=900">
+      <svg id="fallback" viewBox="0 0 400 420" style="display:none" aria-hidden="true"></svg>
+    </div>
+
+    <div class="panel">
+      <p class="eyebrow">Poul Henningsen · 1958</p>
+      <h1>PH Artichoke 480<em>Koglen</em></h1>
+      <p class="lede">72 laserskårne blade i 12 rækker. Blændfri i enhver synsvinkel — lyset ses aldrig direkte, kun det den rammer.</p>
+
+      <div class="price">
+        <span class="now" id="price">55.295 kr.</span>
+        <span class="was">79.000 kr.</span>
+        <span class="save">Spar 30 %</span>
+      </div>
+      <p class="vat">Inkl. moms. Fri fragt i Danmark.</p>
+
+      <p class="label">Overflade</p>
+      <ul class="swatches" id="swatches"></ul>
+      <p class="variant-name" id="variantName"></p>
+
+      <div class="buy">
+        <div class="qty">
+          <button type="button" id="minus" aria-label="Færre">−</button>
+          <span id="qty">1</span>
+          <button type="button" id="plus" aria-label="Flere">+</button>
+        </div>
+        <button class="cta" id="buy">
+          <span class="spin"></span><span id="buyLabel">Køb — 55.295 kr.</span>
+        </button>
+      </div>
+      <p class="err" id="err"></p>
+
+      <div class="assure">
+        <span>Sikker betaling via Stripe</span>
+        <span>30 dages returret</span>
+        <span>2 års garanti</span>
+      </div>
+
+      <details>
+        <summary>Specifikationer</summary>
+        <dl id="specs"></dl>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Koglen — enkeltproduktbutik. Demo bygget på data fra produktsiden.</span>
+  <span>
+    <a href="/api/product.json">Produktfeed</a> ·
+    <a href="/.well-known/agent.json">Agent-manifest</a> ·
+    <a href="/llms.txt">llms.txt</a>
+  </span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script type="application/ld+json" id="jsonld"></script>
+<script>
+const VARIANTS = [
+  { id:'copper-chrome', name:'Kobber / krom',        swatch:'#b06d44', delta:0, stock:1 },
+  { id:'brass-brass',   name:'Messing / messing',    swatch:'#b3924f', delta:0, stock:1 },
+  { id:'steel-chrome',  name:'Rustfrit stål / krom', swatch:'#a9adb2', delta:0, stock:1 },
+  { id:'black',         name:'Sort',                 swatch:'#22201e', delta:0, stock:1 },
+  { id:'soft-white',    name:'Soft white',           swatch:'#eae7e0', delta:0, stock:1 },
+  { id:'dusty-green',   name:'Dusty green',          swatch:'#6d7a68', delta:0, stock:0 },
+  { id:'dusty-blue',    name:'Dusty blue',           swatch:'#6b7d8c', delta:0, stock:1 },
+];
+const BASE = 5529500; // øre
+const SPECS = [
+  ['Diameter','48 cm'], ['Højde','46,5 cm'], ['Ledning','4 m'],
+  ['Lyskilde','1 × E27, maks. 100 W'], ['Blade','72 stk. i 12 rækker'],
+  ['Beskyttelse','IP20 · klasse I'], ['Producent','Louis Poulsen'],
+];
+
+const kr = m => new Intl.NumberFormat('da-DK',{style:'currency',currency:'DKK',maximumFractionDigits:0}).format(m/100);
+const $ = s => document.querySelector(s);
+
+let state = { variant: new URLSearchParams(location.search).get('variant') || VARIANTS[0].id, qty: 1 };
+
+/* specs */
+$('#specs').innerHTML = SPECS.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+
+/* swatches */
+$('#swatches').innerHTML = VARIANTS.map(v =>
+  `<li><button class="sw" style="--c:${v.swatch}" data-id="${v.id}" data-stock="${v.stock}"
+      aria-pressed="false" title="${v.name}"><span class="sr" hidden>${v.name}</span></button></li>`).join('');
+
+function render(){
+  const v = VARIANTS.find(x=>x.id===state.variant) || VARIANTS[0];
+  document.querySelectorAll('.sw').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id===v.id)));
+  $('#variantName').textContent = v.stock ? v.name : v.name + ' — på restordre';
+  $('#qty').textContent = state.qty;
+  const total = (BASE + v.delta) * state.qty;
+  $('#price').textContent = kr(BASE + v.delta);
+  $('#buyLabel').textContent = v.stock ? `Køb — ${kr(total)}` : 'Udsolgt';
+  $('#buy').disabled = !v.stock;
+  history.replaceState(null,'',`?variant=${v.id}`);
+  jsonld();
+}
+
+function jsonld(){
+  $('#jsonld').textContent = JSON.stringify({
+    '@context':'https://schema.org','@type':'Product',
+    name:'PH Artichoke 480 — Koglen', sku:'106/480KOGLE/MASTER',
+    brand:{'@type':'Brand',name:'Louis Poulsen'},
+    image:[$('#hero').getAttribute('src')],
+    description:'72 laserskårne blade i 12 rækker. Blændfri i enhver synsvinkel.',
+    offers: VARIANTS.map(v=>({
+      '@type':'Offer', name:v.name, price:((BASE+v.delta)/100).toFixed(2), priceCurrency:'DKK',
+      availability: v.stock ? 'https://schema.org/InStock' : 'https://schema.org/BackOrder',
+      url: location.origin + '/?variant=' + v.id
+    }))
+  });
+}
+
+$('#swatches').addEventListener('click', e => {
+  const b = e.target.closest('.sw'); if(!b) return;
+  state.variant = b.dataset.id; render();
+});
+$('#plus').onclick = () => { state.qty = Math.min(5, state.qty+1); render(); };
+$('#minus').onclick = () => { state.qty = Math.max(1, state.qty-1); render(); };
+
+$('#buy').onclick = async () => {
+  const btn = $('#buy'); btn.classList.add('loading'); btn.disabled = true; $('#err').textContent = '';
+  try{
+    const r = await fetch('/api/checkout', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ variant: state.variant, quantity: state.qty })
+    });
+    const data = await r.json();
+    if(!r.ok || !data.url) throw new Error(data.error || 'Kunne ikke oprette betaling.');
+    location.href = data.url;
+  }catch(err){
+    $('#err').textContent = err.message;
+    btn.classList.remove('loading'); btn.disabled = false;
+  }
+};
+
+if(new URLSearchParams(location.search).get('checkout')==='cancelled'){
+  const t = $('#toast'); t.textContent = 'Betalingen blev afbrudt — kurven er gemt.';
+  t.classList.add('on'); setTimeout(()=>t.classList.remove('on'), 4200);
+}
+
+/* hero image: fade in, or draw a fallback lamp if the CDN blocks hotlinking */
+const hero = $('#hero');
+hero.addEventListener('load', () => hero.classList.add('in'));
+hero.addEventListener('error', () => { hero.remove(); drawLamp(); });
+if(hero.complete && hero.naturalWidth) hero.classList.add('in');
+
+function drawLamp(){
+  const svg = $('#fallback'); svg.style.display='block';
+  const cx=200, top=70, rows=12, per=6;
+  let p = `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c98b5c"/><stop offset="1" stop-color="#8a5330"/></linearGradient></defs>
+    <line x1="${cx}" y1="0" x2="${cx}" y2="${top}" stroke="currentColor" stroke-width="1" opacity=".5"/>`;
+  for(let r=0;r<rows;r++){
+    const t=r/(rows-1);
+    const y = top + 22 + t*230;
+    const rad = 34 + Math.sin(t*Math.PI*0.92)*120;
+    const h = 26 + t*8;
+    for(let i=0;i<per;i++){
+      const a = (i/per)*Math.PI*2 + (r%2? Math.PI/per : 0);
+      const x = cx + Math.cos(a)*rad*0.92;
+      const yy = y + Math.sin(a)*rad*0.24;
+      const w = rad*0.44;
+      p += `<path d="M ${x-w/2} ${yy} q ${w/2} ${-h*0.55} ${w} 0 q ${-w/2} ${h*0.5} ${-w} 0 z"
+             fill="url(#g)" opacity="${0.55+0.4*Math.sin(a)}" stroke="rgba(0,0,0,.15)" stroke-width=".5"/>`;
+    }
+  }
+  p += `<ellipse cx="${cx}" cy="${top+300}" rx="120" ry="16" fill="#f9d9a8" opacity=".45"/>`;
+  svg.innerHTML = p;
+  svg.setAttribute('style','display:block;color:currentColor');
+}
+
+render();
+</script>
+</body>
+</html>
